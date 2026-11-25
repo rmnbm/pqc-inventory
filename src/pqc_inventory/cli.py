@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 from pqc_inventory import __version__
+from pqc_inventory.model import Exposure
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -42,8 +43,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--exposure",
-        choices=["internet", "internal", "unknown"],
-        default="unknown",
+        type=Exposure,
+        choices=list(Exposure),
+        default=Exposure.UNKNOWN,
         help="Exposure of network targets, used for prioritisation.",
     )
     parser.add_argument(

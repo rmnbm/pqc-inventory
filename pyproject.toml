@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Cryptographic inventory and post-quantum readiness assessment"
 readme = "README.md"
 requires-python = ">=3.11"
-license = "MIT" 
+license = "MIT"
 dependencies = ["cryptography>=42"]
 
 [project.optional-dependencies]

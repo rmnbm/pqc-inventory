@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from pqc_inventory.cli import build_parser, main
+from pqc_inventory.model import Exposure
 
 
 def test_defaults():
@@ -12,7 +13,7 @@ def test_defaults():
     assert args.tls is None
     assert args.ssh is None
     assert args.out == Path("out")
-    assert args.exposure == "unknown"
+    assert args.exposure is Exposure.UNKNOWN
     assert args.timeout == 5.0
     assert args.delay == 1.0
 
@@ -25,6 +26,11 @@ def test_files_is_converted_to_path():
 def test_timeout_is_converted_to_float():
     args = build_parser().parse_args(["--files", "certs", "--timeout", "2.5"])
     assert args.timeout == 2.5
+
+
+def test_exposure_is_converted_to_enum():
+    args = build_parser().parse_args(["--files", "certs", "--exposure", "internet"])
+    assert args.exposure is Exposure.INTERNET
 
 
 def test_invalid_exposure_exits_with_code_2():
